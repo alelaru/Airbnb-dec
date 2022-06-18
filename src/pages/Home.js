@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import  bg from "../images/frontpagebg.png"
 import  logo from "../images/airbnb.png"
-import { ConnectButton, DatePicker, Input, Select } from "web3uikit";
+import { ConnectButton, DatePicker, Icon, Input, Select } from "web3uikit";
+
 
 
 const Home = () => {
+
+  const [destination, setdestination] = useState(new Date());
+  const [checkIn, setcheckIn] = useState(new Date());
+  const [checkOut, setcheckOut] = useState("New York");
+  const [guests, setguests] = useState(2);
 
   return (
     <>
@@ -33,7 +39,7 @@ const Home = () => {
             Location
             <Select
               defaultOptionIndex={0}
-              onChange={(data) => console.log(data.label)}
+              onChange={(data) => setdestination(data.label)}
               options={[
                 {
                   id: "ny",
@@ -63,7 +69,8 @@ const Home = () => {
             Check-in
             <DatePicker
               id="check-in"
-              onChange={(e) => console.log(e.data)}
+              onChange={(e) => setcheckIn(e.date)}
+              min={new Date()}
             ></DatePicker>
           </div>
           <div className="vl"></div>
@@ -71,7 +78,7 @@ const Home = () => {
             Check-out
             <DatePicker
               id="check-out"
-              onChange={(e) => console.log(e.data)}
+              onChange={(e) => setcheckOut(e.date)}
             ></DatePicker>  
           </div>
           <div className="vl"></div>
@@ -81,9 +88,16 @@ const Home = () => {
               value={2}
               name="AddGuests"
               type="number"
-              onChange={e => console.log(e.data) }
+              onChange={e => setguests(e.target.value) }
             >
             </Input>
+          </div>
+          <div className="searchButton">
+            <Icon
+              fill="#ffffff"
+              size={24}
+              svg="search"
+            ></Icon>
           </div>
         </div>
       </div>
