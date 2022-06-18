@@ -3,7 +3,7 @@ import "./Home.css";
 import { Link } from "react-router-dom";
 import  bg from "../images/frontpagebg.png"
 import  logo from "../images/airbnb.png"
-import { ConnectButton, DatePicker, Icon, Input, Select } from "web3uikit";
+import { Button, ConnectButton, DatePicker, Icon, Input, Select } from "web3uikit";
 
 
 
@@ -88,18 +88,33 @@ const Home = () => {
               value={2}
               name="AddGuests"
               type="number"
-              onChange={e => setguests(e.target.value) }
+              onChange={e => setguests(Number(e.target.value))}
             >
             </Input>
           </div>
-          <div className="searchButton">
-            <Icon
-              fill="#ffffff"
-              size={24}
-              svg="search"
-            ></Icon>
-          </div>
+          <Link to={"/rentals"} state={{destination, checkIn, checkOut, guests}}>
+          {/* <Link to={"/rentals"} state={{destination:destination, checkIn, checkOut, guests }}> */}
+
+            <div className="searchButton">
+              <Icon
+                fill="#ffffff"
+                size={24}
+                svg="search"
+              ></Icon>
+            </div>
+          </Link>
         </div>
+      </div>
+
+      <div className="randomLocation">
+        <div className="title">Feel Adventurous</div>
+        <div className="text">
+          Let us decide and explore new places to stay, live, work or just relax.
+        </div>
+        <Button
+          text="Explore a Location"
+          onClick={() => console.log(checkOut)}
+        ></Button>
       </div>
 
     </>
