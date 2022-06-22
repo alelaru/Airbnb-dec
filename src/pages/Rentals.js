@@ -1,14 +1,27 @@
 import React from "react";
 import "./Rentals.css";
 import { Link, useLocation } from "react-router-dom";
-import { ConnectButton, Icon } from "web3uikit";
+import { Button, ConnectButton, Icon } from "web3uikit";
 import logo from "../images/airbnbRed.png"
 
 const Rentals = () => {
 
   const { state: searchFilters } = useLocation();
-  console.log(searchFilters);
-  console.log(searchFilters.destination);
+  const rentalList = [
+    {
+      attributes: {
+        city: "New York",
+        unoDescription: "3 Guests • 2 Beds • 2 Rooms",
+        dosDescription: "Wifi • Kitchen • Living Area",
+        imgUrl:
+          "https://ipfs.moralis.io:2053/ipfs/QmS3gdXVcjM72JSGH82ZEvu4D7nS6sYhbi5YyCw8u8z4pE/media/3",
+        lat: "40.716862",
+        long: "-73.999005",
+        name: "Apartment in China Town",
+        pricePerDay: "3",
+      },
+    },
+  ];
 
 
   return (
@@ -43,6 +56,44 @@ const Rentals = () => {
       <div className="lrContainers">
         <ConnectButton></ConnectButton>
       </div>
+     </div>
+
+     <div className="line"></div>
+     <div className="rentalsContent">
+      <div className="rentalsContentL">
+        Stays Available for your destination
+        {rentalList && 
+        rentalList.map(e => {
+          return (
+            <>
+                  <hr className="line2" />
+                  <div className="rentalDiv">
+                      <img src={e.attributes.imgUrl} alt="rentalImage" className="rentalImg" />
+                      <div className="rentalInfo">
+                          <div className="rentalTitle">{e.attributes.name}</div>
+                          <div className="rentalDesc">
+                            {e.attributes.unoDescription}
+                          </div>
+                          <div className="rentalDesc">
+                            {e.attributes.dosDescription}
+                          </div>
+                          <div className="bottomButton">
+                            <Button
+                              text="Stay Here"
+                            ></Button>
+                            <div className="price">
+                              <Icon fill="#808080" size={10} svg="matic" ></Icon>{e.attributes.pricePerDay} / Day
+                            </div>
+                          </div>
+                      
+                      </div>
+                  </div>
+            </>
+          )
+        })
+        }
+      </div>
+      <div className="rentalsContentR"></div>
      </div>
     </>
   );
