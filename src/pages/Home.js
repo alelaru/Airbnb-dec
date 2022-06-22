@@ -9,9 +9,9 @@ import { Button, ConnectButton, DatePicker, Icon, Input, Select } from "web3uiki
 
 const Home = () => {
 
-  const [destination, setdestination] = useState(new Date());
+  const [destination, setdestination] = useState("New York");
   const [checkIn, setcheckIn] = useState(new Date());
-  const [checkOut, setcheckOut] = useState("New York");
+  const [checkOut, setcheckOut] = useState(new Date());
   const [guests, setguests] = useState(2);
 
   return (
