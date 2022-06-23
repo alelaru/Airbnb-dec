@@ -3,6 +3,7 @@ import "./Rentals.css";
 import { Link, useLocation } from "react-router-dom";
 import { Button, ConnectButton, Icon } from "web3uikit";
 import logo from "../images/airbnbRed.png"
+import RentalsMap from "../components/RentalsMap";
 
 const Rentals = () => {
 
@@ -23,6 +24,10 @@ const Rentals = () => {
     },
   ];
 
+  const coords = [];
+  rentalList.forEach(e => {
+    coords.push({ lat: e.attributes.lat, lng: e.attributes.long})
+  })
 
   return (
     <>
@@ -93,7 +98,10 @@ const Rentals = () => {
         })
         }
       </div>
-      <div className="rentalsContentR"></div>
+      <div className="rentalsContentR">
+        <RentalsMap locations={coords}></RentalsMap>
+
+      </div>
      </div>
     </>
   );
