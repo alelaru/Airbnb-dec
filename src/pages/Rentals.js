@@ -68,7 +68,7 @@ const Rentals = () => {
       <div className="rentalsContentL">
         Stays Available for your destination
         {rentalList && 
-        rentalList.map(e => {
+        React.Children.toArray(rentalList.map(e => {
           return (
             <>
                   <hr className="line2" />
@@ -95,7 +95,7 @@ const Rentals = () => {
                   </div>
             </>
           )
-        })
+        }))
         }
       </div>
       <div className="rentalsContentR">

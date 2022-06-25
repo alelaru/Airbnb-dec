@@ -1,22 +1,25 @@
-import { GoogleApiWrapper, Map } from "google-maps-react";
+import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
 import React, { useEffect, useState } from "react";
 
-function RentalsMap( {locations, google} ) {
+
+function RentalsMap( {locations, google, setHighlight} ) {
 
   const [center, setcenter] = useState();
 
   useEffect(() => {
 
-    var arr = Object.keys(locations)
-    var getLad = (key) => locations[key]["lat"]
-    var avgLad = arr.reduce((a,c) => a + Number(getLad(c)),0) / arr.length;
-
-    var getLng = (key) => locations[key]["lat"]
-    var avgLng = arr.reduce((a,c) => a + Number(getLng(c)),0) / arr.length;
-
-    setcenter({lat: avgLad, lng: avgLng})
-
+      var arr = Object.keys(locations)
+      var getLad = (key) => locations[key]["lat"]
+      var avgLad = arr.reduce((a,c) => a + Number(getLad(c)),0) / arr.length;
+  
+      var getLng = (key) => locations[key]["lat"]
+      var avgLng = arr.reduce((a,c) => a + Number(getLng(c)),0) / arr.length;
+  
+      setcenter({lat: avgLad, lng: avgLng})   
+    
   }, [locations]);
+
+  
 
   return (
     <>
@@ -31,7 +34,13 @@ function RentalsMap( {locations, google} ) {
       initialCenter={locations[0]}
       zoom={13}
       desableDefaultUI={true}
-      ></Map>
+      >
+        {locations && 
+          locations.map((coords, i ) => (
+          <Marker position={coords} key={i} onClick={() => setHighlight(i)}></Marker>
+        ))}
+
+      </Map>
 
       }
 
